@@ -30,7 +30,7 @@ while IFS=, read model nhid batch_size dropout lr epochs ; do
      --log $logs_dir/${model_name}.txt \
      --cuda
 
-     exit 1
+    #  exit 1
 done
 
 
@@ -105,7 +105,7 @@ echo "=================================================="
 exec < $params_dir/ngram_lstm_params.csv || exit 1
 read header
 while IFS=, read model nhid batch_size dropout lr epochs ; do
-    model_name="${model}_hidden${nhid}_batch${batch_size}_dropout${dropout}_lr${lr}"
+    model_name="5gram_${model}_hidden${nhid}_batch${batch_size}_dropout${dropout}_lr${lr}"
     echo $model_name
     echo "----------------------------------------------------------"
     
@@ -126,7 +126,7 @@ echo "=================================================="
 exec < $params_dir/ngram_lstm_params.csv || exit 1
 read header
 while IFS=, read model nhid batch_size dropout lr epochs ; do
-    model_name="${model}_hidden${nhid}_batch${batch_size}_dropout${dropout}_lr${lr}"
+    model_name="5gram_${model}_hidden${nhid}_batch${batch_size}_dropout${dropout}_lr${lr}"
     echo $model_name
     echo "----------------------------------------------------------"
     
