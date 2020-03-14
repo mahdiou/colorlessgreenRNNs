@@ -2,3 +2,9 @@ src/tmp/
 data/**/*.output_*
 **/__pycache__
 src/**/*.pyc
+data/corpora/
+data/logs/
+data/lm/en_parlement/
+data/lm/fr_parlement/
+data/models/en_parlement/
+data/models/fr_parlement/
