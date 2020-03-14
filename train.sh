@@ -1,6 +1,5 @@
 cd src/
 
-
 echo "==== Generating train/test/valid sets and vocabulary for english ===="
 python data/data_vocab_prep.py --input ../data/corpora/english.txt --output_dir ../data/lm/en_parlement --vocab 10000
 
