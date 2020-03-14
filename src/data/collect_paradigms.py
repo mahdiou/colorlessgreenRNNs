@@ -8,13 +8,16 @@
 import argparse
 from collections import defaultdict
 
-from data import data_utils
+# from data
+import data_utils
 
-parser = argparse.ArgumentParser(description='Reading and processing a large gzip file')
+parser = argparse.ArgumentParser(
+    description='Reading and processing a large gzip file')
 
 parser.add_argument('--input', type=str, required=True,
                     help='Input path (in a column CONLL UD format)')
-parser.add_argument('--output', type=str, required=True, help="Output file name")
+parser.add_argument('--output', type=str, required=True,
+                    help="Output file name")
 parser.add_argument('--nwords', type=int, default='100000000', required=False,
                     help='How many words to process')
 parser.add_argument('--min_freq', type=int, default='5', required=False,
@@ -37,6 +40,6 @@ for line in data_utils.read(args.input):
 with open(args.output, 'w') as f:
     for p in paradigms:
         if paradigms[p] > args.min_freq:
-            f.write("\t".join(el for el in p) + "\t" + str(paradigms[p]) + "\n")
+            f.write("\t".join(el for el in p) +
+                    "\t" + str(paradigms[p]) + "\n")
     f.close()
-

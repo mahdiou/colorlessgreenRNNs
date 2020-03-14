@@ -1,0 +1,49 @@
+--model
+--emsize
+--nhid
+--nlayers
+--dropout
+--tied ?
+--lr
+--clip
+--epochs
+--batch_size
+--bptt
+--seed
+--cuda
+--save
+--log
+
+LSTM
+    --model LSTM
+    --nhid 200 650
+    --emsize 200 650
+    --batch_size 20 (for 200 units) 64 128
+    --dropout 0.0 0.1 0.2 0.4
+    --lr 1.0 5.0 10.0 20.0
+    --epochs 40
+
+sRNN
+    --model RNN_RELU
+    --nhid 650
+    --emsize 650
+    --batch_size 64 128
+    --dropout 0.0 0.1 0.2
+    --lr 0.5 1.0 5.0 10.0
+    --epochs 60
+
+    --model RNN_TANH
+    --nhid 650
+    --emsize 650
+    --dropout 0.0 0.1 0.2
+    --lr 0.5 1.0 5.0 10.0
+    --epochs 60
+
+
+ngram LSTM
+    --nhid 650
+    --batch_size 256 512 1024
+    --dropout 0.0 0.1 0.2
+    --lr 1.0 5.0 10.0 20.0
+    --train
+

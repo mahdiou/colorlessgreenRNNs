@@ -49,11 +49,12 @@ def generate_morph_pattern_test(trees, pattern, paradigms, vocab, n_sentences=10
             if i == 0:
                 new_context = " ".join(n.word for n in t.nodes)
                 form = r.word
-                form_alt = get_alt_form(r.lemma,r.pos,r.morph,ltm_paradigms)
+                form_alt = get_alt_form(r.lemma, r.pos, r.morph, ltm_paradigms)
                 lemma = r.lemma
             else:
                 new_context = generate_context(t.nodes, paradigms, vocab)
-                random_forms = choose_random_forms(ltm_paradigms,vocab, r.pos,r.morph, n_samples=1, gold_word=r.word)
+                random_forms = choose_random_forms(
+                    ltm_paradigms, vocab, r.pos, r.morph, n_samples=1, gold_word=r.word)
                 if len(random_forms) > 0:
                     lemma, form, form_alt = random_forms[0]
                 else:
@@ -61,11 +62,13 @@ def generate_morph_pattern_test(trees, pattern, paradigms, vocab, n_sentences=10
                     # original form and its alternation are not found because e.g. one or the other is not in paradigms
                     # (they should anyway be in the vocabulary)
                     lemma, form = r.lemma, r.word
-                    form_alt = get_alt_form(r.lemma, r.pos, r.morph, ltm_paradigms)
+                    form_alt = get_alt_form(
+                        r.lemma, r.pos, r.morph, ltm_paradigms)
 
             # constr_id sent_id Z_index Z_pos Z_gold_morph
             gold_str = "\t".join([pattern_id, str(constr_id), str(i),
-                                  str(r.index - 1), r.pos, r.morph, form, form_alt, lemma,
+                                  str(r.index -
+                                      1), r.pos, r.morph, form, form_alt, lemma,
                                   str(l.index - 1), l.pos, prefix]) + "\n"
 
             output.append((new_context + " <eos>\n", gold_str))
@@ -135,15 +138,20 @@ def choose_random_forms(ltm_paradigms, vocab, gold_pos, morph, n_samples=10, gol
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Generating sentences based on patterns')
+    parser = argparse.ArgumentParser(
+        description='Generating sentences based on patterns')
 
     parser.add_argument('--treebank', type=str, required=True,
                         help='input file (in a CONLL column format)')
-    parser.add_argument('--paradigms', type=str, required=True, help="the dictionary of tokens and their morphological annotations")
-    parser.add_argument('--vocab', type=str, required=True,help='(LM) Vocabulary to generate words from')
+    parser.add_argument('--paradigms', type=str, required=True,
+                        help="the dictionary of tokens and their morphological annotations")
+    parser.add_argument('--vocab', type=str, required=True,
+                        help='(LM) Vocabulary to generate words from')
     parser.add_argument('--patterns', type=str, required=True)
-    parser.add_argument('--output', type=str, required=True, help="prefix for generated text and annotation data")
-    parser.add_argument('--lm_data', type=str, required=False, help="path to LM data to estimate word frequencies")
+    parser.add_argument('--output', type=str, required=True,
+                        help="prefix for generated text and annotation data")
+    parser.add_argument('--lm_data', type=str, required=False,
+                        help="path to LM data to estimate word frequencies")
     args = parser.parse_args()
 
     trees = tm.load_trees_from_conll(args.treebank)
@@ -162,7 +170,8 @@ def main():
     for line in open(args.patterns, "r"):
         print("Generating sentences with pattern", line.strip())
         #l_values = ('Gender=Fem|Number=Sing','Gender=Masc|Number=Plur')
-        data = generate_morph_pattern_test(trees, line.strip(), paradigms, vocab)
+        data = generate_morph_pattern_test(
+            trees, line.strip(), paradigms, vocab)
         output.extend(data)
         print("Generated", len(data), "sentences")
 
@@ -179,7 +188,8 @@ def main():
     ##############################################################
 
     data = transform_gold(golds)
-    data = pd.DataFrame(data, columns=["pattern_id", "constr_id", "sent_id", "correct_number", "form", "class"])
+    data = pd.DataFrame(data, columns=[
+                        "pattern_id", "constr_id", "sent_id", "correct_number", "form", "class"])
     data.loc[data.sent_id == 0, "type"] = "original"
     data.loc[data.sent_id > 0, "type"] = "generated"
 
@@ -194,11 +204,10 @@ def main():
         freq_dict = vocab_freqs(args.lm_data + "/train.txt", vocab)
         full_df["freq"] = full_df["form"].map(freq_dict)
         fields = ["pattern", "constr_id", "sent_id", "correct_number", "form", "class", "type", "prefix", "n_attr",
-                  "punct","freq", "len_context", "len_prefix", "sent"]
+                  "punct", "freq", "len_context", "len_prefix", "sent"]
     else:
         fields = ["pattern", "constr_id", "sent_id", "correct_number", "form", "class", "type", "prefix", "n_attr",
-                  "punct","len_context", "len_prefix", "sent"]
-
+                  "punct", "len_context", "len_prefix", "sent"]
 
     full_df[fields].to_csv(args.output + ".tab", sep="\t", index=False)
 

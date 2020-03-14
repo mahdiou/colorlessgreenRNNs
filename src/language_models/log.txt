@@ -1,0 +1,6 @@
+INFO:root:Namespace(batch_size=20, bptt=35, clip=0.25, cuda=False, data='../../data/corpora/fr_parlement.txt', dropout=0.2, emsize=200, epochs=40, log='log.txt', log_interval=200, lr=20, model='LSTM', nhid=200, nlayers=2, save='model.pt', seed=1111, tied=False)
+INFO:root:Loading data
+INFO:root:Vocab file not found, creating new vocab file.
+INFO:root:Namespace(batch_size=20, bptt=35, clip=0.25, cuda=False, data='../../data/lm/fr_parlement', dropout=0.2, emsize=200, epochs=40, log='log.txt', log_interval=200, lr=20, model='LSTM', nhid=200, nlayers=2, save='model.pt', seed=1111, tied=False)
+INFO:root:Loading data
+INFO:root:Vocab file not found, creating new vocab file.
