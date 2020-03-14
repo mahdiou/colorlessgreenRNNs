@@ -95,5 +95,5 @@ def create_corpus(input_path, output_path, vocab):
 
 w2idx, idx2w = create_vocab(args.input, args.vocab)
 
-convert_text(args.input, args.output, w2idx)
+# convert_text(args.input, args.output, w2idx)
 create_corpus(args.input, args.output_dir, w2idx)
