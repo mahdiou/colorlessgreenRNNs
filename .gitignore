@@ -8,3 +8,5 @@ data/lm/en_parlement/
 data/lm/fr_parlement/
 data/models/en_parlement/
 data/models/fr_parlement/
+env/
+venv/

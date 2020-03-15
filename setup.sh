@@ -1,14 +1,12 @@
 # installs python3.5 with the required libraries
 
-usage(){
-    echo "Usage: $0 path/to/create/env"
-    exit 1
-}
+# usage(){
+#     echo "Usage: $0 path/to/create/env"
+#     exit 1
+# }
 
-start_dir=`pwd`
-
-envpath=$1
-requirements=./requirements.txt
+# envpath=$1
+# requirements=./
 
 [[ -z "$envpath" ]] && usage
 
@@ -29,11 +27,9 @@ pip3 freeze | grep virtualenv || {
 }
 
 echo "creating virtual environment"
-old_dir=`pwd`
-cd $envpath && virtualenv --python=$(which python3.5) env
+
+virtualenv --python=$(which python3.5) env
 source env/bin/activate
 
-cd $old_dir
-
 echo "installing required packages"
-pip install -r $requirements
+pip install -r requirements.txt
