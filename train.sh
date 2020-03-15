@@ -26,7 +26,7 @@ while IFS=, read model nhid batch_size dropout lr epochs ; do
     python language_models/main.py --data $data_dir/lm/en_parlement \
      --model $model --emsize $nhid --nhid $nhid --dropout $dropout \
      --lr $lr --epochs $epochs \
-     --model $en_models_dir/${model_name}.pt \
+     --save $en_models_dir/${model_name}.pt \
      --log $logs_dir/${model_name}.txt \
      --cuda
 
@@ -48,7 +48,7 @@ while IFS=, read model nhid batch_size dropout lr epochs ; do
     python language_models/main.py --data $data_dir/lm/fr_parlement \
      --model $model --emsize $nhid --nhid $nhid --dropout $dropout \
      --lr $lr --epochs $epochs \
-     --model $fr_models_dir/${model_name}.pt \
+     --save $fr_models_dir/${model_name}.pt \
      --log $logs_dir/${model_name}.txt \
      --cuda
 done
@@ -70,7 +70,7 @@ while IFS=, read model nhid batch_size dropout lr epochs ; do
     python language_models/main.py --data $data_dir/lm/en_parlement \
      --model $model --emsize $nhid --nhid $nhid --dropout $dropout \
      --lr $lr --epochs $epochs \
-     --model $en_models_dir/${model_name}.pt \
+     --save $en_models_dir/${model_name}.pt \
      --log $logs_dir/${model_name}.txt \
      --cuda
 done
@@ -90,7 +90,7 @@ while IFS=, read model nhid batch_size dropout lr epochs ; do
     python language_models/main.py --data $data_dir/lm/fr_parlement \
      --model $model --emsize $nhid --nhid $nhid --dropout $dropout \
      --lr $lr --epochs $epochs \
-     --model $fr_models_dir/${model_name}.pt \
+     --save $fr_models_dir/${model_name}.pt \
      --log $logs_dir/${model_name}.txt \
      --cuda
 done
@@ -112,7 +112,7 @@ while IFS=, read model nhid batch_size dropout lr epochs ; do
     python language_models/ngram_lstm.py --data $data_dir/lm/en_parlement \
      --model $model --emsize $nhid --nhid $nhid --dropout $dropout \
      --lr $lr --epochs $epochs \
-     --model $en_models_dir/${model_name}.pt \
+     --save $en_models_dir/${model_name}.pt \
      --log $logs_dir/${model_name}.txt \
      --cuda
      --train
@@ -133,7 +133,7 @@ while IFS=, read model nhid batch_size dropout lr epochs ; do
     python language_models/ngram_lstm.py --data $data_dir/lm/fr_parlement \
      --model $model --emsize $nhid --nhid $nhid --dropout $dropout \
      --lr $lr --epochs $epochs \
-     --model $fr_models_dir/${model_name}.pt \
+     --save $fr_models_dir/${model_name}.pt \
      --log $logs_dir/${model_name}.txt \
      --cuda
 done
